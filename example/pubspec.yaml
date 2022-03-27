@@ -1,4 +1,5 @@
 name: flutter_3des_plugin_example
+version: 1.0.0+100000
 description: Demonstrates how to use the flutter_3des_plugin plugin.
 publish_to: 'none'
 

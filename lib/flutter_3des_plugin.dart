@@ -14,4 +14,7 @@ class Flutter3desPlugin {
   static Future<String> encrypt(String key, String data) async{
     return await _channel.invokeMethod('encrypt' , <String,dynamic>{'data':data,'key':key});
   }
+  static Future<String> decrypt(String key, String data) async{
+    return await _channel.invokeMethod('decrypt' , <String,dynamic>{'data':data,'key':key});
+  }
 }

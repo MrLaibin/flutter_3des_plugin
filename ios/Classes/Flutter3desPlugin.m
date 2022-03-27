@@ -19,15 +19,30 @@
     NSDictionary* argsMap=call.arguments;
     NSString * data=argsMap[@"data"];
     NSString * key=argsMap[@"key"];
-    NSString *batteryLevel = [self encrypt:data key:key];
+
+    JKEncrypt * en = [[JKEncrypt alloc]init];
+    NSString *batteryLevel = [en encrypt3DesData:data key:key];
     if (batteryLevel) {
         result(batteryLevel);
-    } else
-    {
+    } else{
         result([FlutterError errorWithCode:@"UNAVAILABLE"
         message:@"Battery info unavailable"
         details:nil]);
     }
+  }else if([@"decrypt" isEqualToString:call.method]) {
+        NSDictionary* argsMap=call.arguments;
+        NSString * data=argsMap[@"data"];
+        NSString * key=argsMap[@"key"];
+        JKEncrypt * en = [[JKEncrypt alloc]init];
+           //加密
+        NSString * encryptStr = [en decrypt3DesData:data key:key];
+      if (encryptStr) {
+          result(encryptStr);
+      } else{
+          result([FlutterError errorWithCode:@"UNAVAILABLE"
+          message:@"Battery info unavailable"
+          details:nil]);
+      }
   } else {
     result(FlutterMethodNotImplemented);
   }

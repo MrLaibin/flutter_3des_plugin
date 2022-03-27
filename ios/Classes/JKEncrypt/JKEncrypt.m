@@ -14,7 +14,48 @@
 
 @implementation JKEncrypt
 
-
+/**
+ *  3DES解密算法
+ *
+ *  @param dataHexString      待操作NSString数据
+ *  @param key       key
+ *  @return
+ */
+- (NSString *)decrypt3DesData:(NSString *)dataHexString key:(NSString *)key {
+    
+    if (!dataHexString || [dataHexString length] == 0 || !key) {
+        return nil;
+    }
+    
+    NSString *keyHexString = key;
+    
+    
+    NSString *key1 = [keyHexString substringWithRange:NSMakeRange(0, 16)];
+    NSString *key2 = [keyHexString substringWithRange:NSMakeRange(16, 16)];
+    
+    //des加密 key1
+    NSString *encryptString = [self desEncryptOperation:kCCDecrypt data:dataHexString key:key1];
+//    NSLog(@"第一次加密");
+//    NSLog(@"加密前数据：%@",dataHexString);
+//    NSLog(@"加密key：%@",key1);
+//    NSLog(@"加密后数据：%@",encryptString);
+    //des解密 key2
+    NSString *decryptString = [self desEncryptOperation:kCCEncrypt data:encryptString key:key2];
+//    NSLog(@"第二次解密");
+//    NSLog(@"解密前数据：%@",encryptString);
+//    NSLog(@"解密key：%@",key2);
+//    NSLog(@"解密后数据：%@",decryptString);
+    //des加密 key1
+    NSString *dataOut = [self desEncryptOperation:kCCDecrypt data:decryptString key:key1];
+//    NSLog(@"第三次加密");
+//    NSLog(@"加密前数据：%@",decryptString);
+//    NSLog(@"加密key：%@",key1);
+//    NSLog(@"加密后数据：%@",dataOut);
+    
+    return dataOut;
+    
+}
+/**
 /**
  *  3DES加解密算法
  *
@@ -127,7 +168,7 @@
         return nil;
     }
     
-    Byte bytes[8] = {};
+    Byte bytes[16] = {};
     
     for (int i = 0; i < hexString.length/2; i ++) {
         NSString *byteString = [hexString substringWithRange:NSMakeRange(i*2, 2)];
@@ -136,7 +177,7 @@
         bytes[i] = hexByte;
     }
     
-    NSData *data = [[NSData alloc] initWithBytes:bytes length:8];
+    NSData *data = [[NSData alloc] initWithBytes:bytes length:16];
     
     return data;
 }

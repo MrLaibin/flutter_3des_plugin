@@ -13,6 +13,8 @@
 #import <Security/Security.h>
 
 @interface JKEncrypt : NSObject
+// 3Des解密
+- (NSString *)decrypt3DesData:(NSString *)dataHexString key:(NSString *)keyHexString;
 
 // 3Des加密
 - (NSString *)encrypt3DesData:(NSString *)dataHexString key:(NSString *)keyHexString;

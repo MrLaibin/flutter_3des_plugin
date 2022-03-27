@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -15,8 +17,9 @@ class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
  
   // _data， _key 数据为测试数据， 实际开发根据项目需求规则生成
-  final String _data = '2005261620000123';
-  final String _key = 'FC1900000123200526162055AA5A5AA5';
+  // 2005261620000123
+  final String _data = '6800300001040000';
+  final String _key = '7472656E646974303132333435363738';
   String _result  = '';
 
   @override
@@ -27,11 +30,16 @@ class _MyAppState extends State<MyApp> {
 
   // 3des 加密
   encrypt () {
-    Flutter3desPlugin.encrypt(_key, _data).then((res) {
+    Flutter3desPlugin.encrypt("7472656E646974303132333435363738", "36383030333030303031303400000000").then((res) {
       // TODO: res就是加密后的数据
       setState(() {
         _result = res; 
       });
+      log("加密后的数据：$res");
+    });
+
+    Flutter3desPlugin.decrypt("7472656E646974303132333435363738", "5160137f6092ba608a271abdc4134840").then((res) {
+      log("解密后的数据：$res");
     });
   }
 
