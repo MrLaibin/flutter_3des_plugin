@@ -88,22 +88,22 @@
     
     //des加密 key1
     NSString *encryptString = [self desEncryptOperation:kCCEncrypt data:dataHexString key:key1];
-    NSLog(@"第一次加密");
-    NSLog(@"加密前数据：%@",dataHexString);
-    NSLog(@"加密key：%@",key1);
-    NSLog(@"加密后数据：%@",encryptString);
+//    NSLog(@"第一次加密");
+//    NSLog(@"加密前数据：%@",dataHexString);
+//    NSLog(@"加密key：%@",key1);
+//    NSLog(@"加密后数据：%@",encryptString);
     //des解密 key2
     NSString *decryptString = [self desEncryptOperation:kCCDecrypt data:encryptString key:key2];
-    NSLog(@"第二次解密");
-    NSLog(@"解密前数据：%@",encryptString);
-    NSLog(@"解密key：%@",key2);
-    NSLog(@"解密后数据：%@",decryptString);
+//    NSLog(@"第二次解密");
+//    NSLog(@"解密前数据：%@",encryptString);
+//    NSLog(@"解密key：%@",key2);
+//    NSLog(@"解密后数据：%@",decryptString);
     //des加密 key1
     NSString *dataOut = [self desEncryptOperation:kCCEncrypt data:decryptString key:key1];
-    NSLog(@"第三次加密");
-    NSLog(@"加密前数据：%@",decryptString);
-    NSLog(@"加密key：%@",key1);
-    NSLog(@"加密后数据：%@",dataOut);
+//    NSLog(@"第三次加密");
+//    NSLog(@"加密前数据：%@",decryptString);
+//    NSLog(@"加密key：%@",key1);
+//    NSLog(@"加密后数据：%@",dataOut);
     
     return dataOut;
     
@@ -254,8 +254,7 @@
     
 //    //先以16为参数告诉strtoul字符串参数表示16进制数字，然后使用0x%X转为数字类型
 //
-    unichar red
-    = strtoul([str UTF8String],0,16);
+    unichar red = strtoul([str UTF8String],0,16);
     
     //strtoul如果传入的字符开头是“0x”,那么第三个参数是0，也是会转为十六进制的,这样写也可以：
     
@@ -296,9 +295,9 @@
         &numBytesEncrypted);
     
     if(cryptorStatus == kCCSuccess) {
-        NSLog(@"Success");
-        NSLog(@"%s",[key UTF8String]);
-        NSLog(@"%@",[NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted]);
+//        NSLog(@"Success");
+//        NSLog(@"%s",[key UTF8String]);
+//        NSLog(@"%@",[NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted]);
         return [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
         
     } else {
